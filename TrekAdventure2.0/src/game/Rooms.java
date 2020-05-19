@@ -1,6 +1,6 @@
 /*
  * Tobias Morton
- * updated 4/26/20
+ * updated 5/19/20
  */
 
 //this class contains the "map" with each room and its specific attributes.
@@ -149,7 +149,7 @@ public class Rooms
 		roomCode = 1;
 		if (firstr1)
 		{
-			//dialogue
+			System.out.println("test");
 		}
 		String navTableInit = "5,-1,2,-1,3,-1,4,-1,-1,-1,";
 		String look = "You're in your dorm room,";

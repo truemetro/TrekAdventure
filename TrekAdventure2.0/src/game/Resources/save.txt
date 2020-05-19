@@ -1,0 +1,5 @@
+1
+2
+FORMAT:
+line 1: room in which to place player
+line 2: games state (first visit booleans, health, items)
