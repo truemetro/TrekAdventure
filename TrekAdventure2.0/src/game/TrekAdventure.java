@@ -1,14 +1,15 @@
 /*
  * Tobias Morton
- * updated 5/19/20
+ * updated 5/20/20
  */
 package game;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class TrekAdventure
 {
-	private static String version = ("a-0.0.4");
+	private static String version = ("a-0.0.5");
 	private static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args)
@@ -104,5 +105,75 @@ public class TrekAdventure
 	      		System.out.println();
 	      	}
 	    }
+	}
+	
+	public static void clear()
+	{
+		for(int i = 0; i < 100; i++)
+		{
+			System.out.println();
+		}
+	}
+	
+	public static void textTimer(String print, int time)
+	{
+		clear();
+		try
+		{
+			
+			System.out.println("\t" + print + "\n\t========");
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			
+			System.out.println("\t" + print + "\n\t=======");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			
+			System.out.println("\t" + print + "\n\t======");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			System.out.println("\t" + print + "\n\t=====");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			System.out.println("\t" + print + "\n\t====");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			System.out.println("\t" + print + "\n\t===");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			System.out.println("\t" + print + "\n\t==");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+			System.out.println("\t" + print + "\n\t=");
+			
+			TimeUnit.MILLISECONDS.sleep(time);
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			
+		}
 	}
 }

@@ -1,6 +1,6 @@
 /*
  * Tobias Morton
- * updated 5/19/20
+ * updated 5/20/20
  */
 
 //this class contains the "map" with each room and its specific attributes.
@@ -19,10 +19,13 @@ public class Rooms
 	//https://www.reddit.com/r/gamedev/comments/13tilj/ways_of_implementing_the_map_in_text_based_game/
 	
 	private static int roomCode;
+	private static boolean inRoom = true;
 	
 	//this method handles player typed commands.
 	public static void commands(String look, boolean first)
 	{
+		TrekAdventure.clear();
+		System.out.print("\tTYPE COMMAND>>");
 		String command = input.nextLine();
 		command = command.toLowerCase();
 		command += " ";
@@ -71,9 +74,9 @@ public class Rooms
 				roomList(9);
 			}
 		}
-		else if(command.substring(0,command.indexOf(" ")).equals("look"))
+		if(command.substring(0,command.indexOf(" ")).equals("look"))
 		{
-			System.out.println(look);
+			TrekAdventure.textTimer(look, 500);
 		}
 	}
 	
@@ -94,19 +97,19 @@ public class Rooms
 	{
 		if (navTable[selection] == -1)
 		{
-			System.out.println("you cant go that way");
+			TrekAdventure.textTimer("you cant go that way", 250);
 		}
 		else if (navTable[selection] == 1)
 		{
-			System.out.println("You wallk into your dorm room");
+			TrekAdventure.textTimer("You walk into your dorm room", 250);
 			r1();
 		}
 		else if (navTable[selection] == 5)
 		{
 			if (roomCode == 1)
-				System.out.println("you walk into the hallway");
+				TrekAdventure.textTimer("you walk into the hallway", 250);
 			else
-				System.out.println("you walk down the hallway");
+				TrekAdventure.textTimer("you walk down the hallway", 250);
 			r5();
 		}
 	}
@@ -147,14 +150,27 @@ public class Rooms
 	public static void r1()
 	{//ctrdormroom
 		roomCode = 1;
+		String look;
+		String navTableInit = "5,-1,2,-1,3,-1,4,-1,-1,-1,";
+		navTable = makeTable(navTableInit);
+		TrekAdventure.clear();
+		
 		if (firstr1)
 		{
-			System.out.println("test");
+			TrekAdventure.textTimer("you're in your dorm room at Starfleet academy.", 250);
+			TrekAdventure.textTimer("It's Saturday, yesterday was graduation.", 250);
+			TrekAdventure.textTimer("There's a notification on the door comms panel.", 250);
+			
+			look = "You're in your dorm room.\n\tThere's a notification flashing\n\ton the door comms panel.";
 		}
-		String navTableInit = "5,-1,2,-1,3,-1,4,-1,-1,-1,";
-		String look = "You're in your dorm room,";
-		navTable = makeTable(navTableInit);
-		commands(look, firstr1);
+		else
+		{
+			look = "You're in your dorm room";
+		}
+		while(inRoom)
+		{
+			commands(look, firstr1);
+		}
 	}
 	
 	public static void r5()
