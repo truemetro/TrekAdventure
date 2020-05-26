@@ -1,6 +1,6 @@
 /*
  * Tobias Morton
- * updated 5/20/20
+ * updated 5/26/20
  */
 
 //this class contains the "map" with each room and its specific attributes.
@@ -19,17 +19,18 @@ public class Rooms
 	//https://www.reddit.com/r/gamedev/comments/13tilj/ways_of_implementing_the_map_in_text_based_game/
 	
 	private static int roomCode;
-	private static boolean inRoom = true;
+	static boolean inRoom = true;
+	static String mail = "\tyou don't have any mail right now.";
 	
 	//this method handles player typed commands.
 	public static void commands(String look, boolean first)
 	{
 		TrekAdventure.clear();
-		System.out.print("\tTYPE COMMAND>>");
+		System.out.print("\tTYPE COMMAND>> ");
 		String command = input.nextLine();
 		command = command.toLowerCase();
 		command += " ";
-		firstConditions(roomCode);
+		firstConditions(roomCode); //sets first visit condition to false
 		
 		if (command.substring(0,command.indexOf(" ")).equals("go"))
 		{
@@ -74,10 +75,23 @@ public class Rooms
 				roomList(9);
 			}
 		}
-		if(command.substring(0,command.indexOf(" ")).equals("look"))
+		
+		else if(command.substring(0,command.indexOf(" ")).equals("look"))
 		{
 			TrekAdventure.textTimer(look, 500);
 		}
+		
+		else if(command.equals("exit "))
+		{
+			inRoom = false;
+			TrekAdventure.menu();
+		}
+		
+		else
+		{
+			roomCommands(1, command);
+		}
+		
 	}
 	
 	//this method turns the navTable initialization string into an array which can be referenced
@@ -114,6 +128,7 @@ public class Rooms
 		}
 	}
 	
+	//sets first visit conditions
 	public static void firstConditions(int selection)
 	{
 		if (selection == 1)
@@ -122,6 +137,18 @@ public class Rooms
 		}
 	}
 	
+	//for non-standard or room specific commands
+	public static void roomCommands(int room, String command)
+	{
+		if (room == 1)
+		{
+			if (command.equals("check panel "))
+			{
+				TrekAdventure.textTimer("The panel asks for a name and handprint", 250);
+				TrekAdventure.panel();
+			}
+		}
+	}
 	
 	//  ||||||	||||||	||||||	||\\__//||	||||||	\\
 	//	||	||	||	||	||	||	|| \__/ ||	||		\\
@@ -146,7 +173,7 @@ public class Rooms
 	
 	private static boolean noFirstCondition;
 	
-	private static boolean firstr1 = true;
+	static boolean firstr1 = true;
 	public static void r1()
 	{//ctrdormroom
 		roomCode = 1;
@@ -167,6 +194,7 @@ public class Rooms
 		{
 			look = "You're in your dorm room";
 		}
+		
 		while(inRoom)
 		{
 			commands(look, firstr1);
